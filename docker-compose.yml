@@ -1,0 +1,52 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: diet-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-123456}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-diet_db}
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # 首次启动自动建表 + 导入种子数据（按文件名顺序执行）
+      - ./src/main/resources/db/diet_db.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./scripts/v2-seed-meals.sql:/docker-entrypoint-initdb.d/02-seed-v2.sql:ro
+      - ./scripts/v4-seed-meals.sql:/docker-entrypoint-initdb.d/03-seed-v4.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  app:
+    build: .
+    image: diet-agent:latest
+    container_name: diet-agent
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DIET_DB_URL: "jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-diet_db}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true"
+      DIET_DB_USERNAME: root
+      DIET_DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:-123456}
+      DIET_LLM_BASE_URL: ${DIET_LLM_BASE_URL:-http://host.docker.internal:7863/v1}
+      DIET_LLM_API_KEY: ${DIET_LLM_API_KEY:-}
+      DIET_LLM_MAIN_MODEL: ${DIET_LLM_MAIN_MODEL:-qwen-max}
+      DIET_LLM_LIGHT_MODEL: ${DIET_LLM_LIGHT_MODEL:-qwen-turbo}
+      TZ: Asia/Shanghai
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    # 容器内访问宿主机上的 LLM 网关（Linux 下必需）
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  mysql-data:

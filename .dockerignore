@@ -1,0 +1,12 @@
+.git
+.gitignore
+.idea
+.vscode
+target
+docs
+.env
+*.pdf
+*.log
+启动.bat
+_h.ps1
+scripts/start.ps1

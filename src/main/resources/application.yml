@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: diet-agent
+  datasource:
+    url: ${DIET_DB_URL:jdbc:mysql://localhost:3306/diet_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true}
+    username: ${DIET_DB_USERNAME:root}
+    password: ${DIET_DB_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.diet.model
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: ${SERVER_PORT:8080}
+diet:
+  llm:
+    # 任意 OpenAI 兼容网关：本地自建 / DashScope 兼容模式 / 其它厂商
+    base-url: ${DIET_LLM_BASE_URL:http://localhost:7863/v1}
+    api-key: ${DIET_LLM_API_KEY:}
+    # 主模型（推荐理由 / 最终应答）与轻量模型（意图识别 / 澄清追问）
+    main-model: ${DIET_LLM_MAIN_MODEL:qwen-max}
+    light-model: ${DIET_LLM_LIGHT_MODEL:qwen-turbo}
+  session:
+    max-history-turns: ${DIET_SESSION_MAX_HISTORY_TURNS:10}
+  eval:
+    # 批量评估并发度：1=串行（旧行为），>1=受控并发
+    concurrency: ${DIET_EVAL_CONCURRENCY:4}
+    # 单条 trace 评估超时（毫秒），超时按截断处理
+    task-timeout-ms: ${DIET_EVAL_TASK_TIMEOUT_MS:60000}
+logging:
+  level:
+    com.diet: ${DIET_LOG_LEVEL:INFO}

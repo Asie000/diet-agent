@@ -1,0 +1,2395 @@
+{
+  "userId": 1,
+  "sourceMode": "PUBLIC",
+  "note": "黄金数据集：覆盖 6 类意图，槽位值全部取自 diet_slot_option 字典。expectedSlots 字段名与 SlotBundle 一致。",
+  "conversations": [
+    {
+      "id": "c01",
+      "name": "午餐-明确推荐",
+      "turns": [
+        {
+          "message": "今天中午想吃点清淡减脂高蛋白的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "healthGoal": [
+              "清淡",
+              "减脂",
+              "高蛋白"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "mealTime + healthGoal 齐全，直接进入推荐"
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "name": "晚餐-菜系口味",
+      "turns": [
+        {
+          "message": "晚饭想吃川菜，辣一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "cuisine": [
+              "川菜"
+            ],
+            "taste": [
+              "辣"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "有强口味/菜系偏好，healthGoal 可缺省"
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "name": "早餐-健康目标+便捷",
+      "turns": [
+        {
+          "message": "早餐想要高蛋白、快速方便的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "早餐"
+            ],
+            "healthGoal": [
+              "高蛋白"
+            ],
+            "convenience": [
+              "快速"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "mealTime + 健康目标 + 便捷"
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "name": "夜宵-加班场景养胃",
+      "turns": [
+        {
+          "message": "加班回来晚了，夜宵想吃点养胃的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "夜宵"
+            ],
+            "scene": [
+              "加班"
+            ],
+            "healthGoal": [
+              "养胃"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "场景 + 餐次 + 健康目标"
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "name": "周末在家-粤菜清淡",
+      "turns": [
+        {
+          "message": "周末午餐想在家吃粤菜，清淡一点",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "scene": [
+              "家里"
+            ],
+            "cuisine": [
+              "粤菜"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "四维齐全"
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "name": "晚餐-缺健康目标需澄清",
+      "turns": [
+        {
+          "message": "晚饭有什么推荐",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "有 mealTime，但 healthGoal 空且无口味/场景/便捷偏好 → 必须追问"
+        }
+      ]
+    },
+    {
+      "id": "c07",
+      "name": "模糊输入-需澄清",
+      "turns": [
+        {
+          "message": "帮我推荐点吃的",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "无任何槽位 → 缺 mealTime 与 healthGoal"
+        }
+      ]
+    },
+    {
+      "id": "c08",
+      "name": "减脂午餐",
+      "turns": [
+        {
+          "message": "我在减脂，中午吃什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "healthGoal": [
+              "减脂"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "槽位齐全"
+        }
+      ]
+    },
+    {
+      "id": "c09",
+      "name": "随意型-需澄清",
+      "turns": [
+        {
+          "message": "随便来点吧",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "无信息"
+        }
+      ]
+    },
+    {
+      "id": "c10",
+      "name": "反问型-需澄清",
+      "turns": [
+        {
+          "message": "你猜我想吃什么",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "无信息"
+        }
+      ]
+    },
+    {
+      "id": "c11",
+      "name": "两轮-换一批",
+      "turns": [
+        {
+          "message": "中午想吃清淡的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "第一轮建立推荐上下文"
+        },
+        {
+          "message": "换一批",
+          "expectedIntent": "MEAL_ADJUST",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "第二轮换一批，触发 multiTurnConsistency 评估"
+        }
+      ]
+    },
+    {
+      "id": "c12",
+      "name": "两轮-减弱辣度",
+      "turns": [
+        {
+          "message": "晚餐想吃川菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "cuisine": [
+              "川菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "第一轮"
+        },
+        {
+          "message": "再清淡一点，别那么辣",
+          "expectedIntent": "MEAL_ADJUST",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "cuisine": [
+              "川菜"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "第二轮调整口味"
+        }
+      ]
+    },
+    {
+      "id": "c13",
+      "name": "三餐规划-清淡",
+      "turns": [
+        {
+          "message": "帮我规划一下今天三餐，清淡为主",
+          "expectedIntent": "MEAL_PLAN",
+          "expectedSlots": {
+            "mealTime": [
+              "三餐"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "多餐规划链路"
+        }
+      ]
+    },
+    {
+      "id": "c14",
+      "name": "早午餐规划-均衡",
+      "turns": [
+        {
+          "message": "帮我安排早餐和午餐吃什么，均衡一点",
+          "expectedIntent": "MEAL_PLAN",
+          "expectedSlots": {
+            "mealTime": [
+              "早餐",
+              "午餐"
+            ],
+            "healthGoal": [
+              "均衡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "多餐规划"
+        }
+      ]
+    },
+    {
+      "id": "c15",
+      "name": "健康风险-胃病",
+      "turns": [
+        {
+          "message": "胃疼吃什么能治好",
+          "expectedIntent": "HEALTH_RISK",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "医疗承诺类，RiskGuard 必须保守拦截"
+        }
+      ]
+    },
+    {
+      "id": "c16",
+      "name": "健康风险-减肥承诺",
+      "turns": [
+        {
+          "message": "有没有一种食物吃了能保证瘦下来",
+          "expectedIntent": "HEALTH_RISK",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "绝对化减肥表述"
+        }
+      ]
+    },
+    {
+      "id": "c17",
+      "name": "健康风险-糖尿病",
+      "turns": [
+        {
+          "message": "糖尿病能不能随便吃甜的",
+          "expectedIntent": "HEALTH_RISK",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "医疗相关"
+        }
+      ]
+    },
+    {
+      "id": "c18",
+      "name": "闲聊-天气",
+      "turns": [
+        {
+          "message": "今天天气怎么样",
+          "expectedIntent": "OTHER",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "与饮食无关"
+        }
+      ]
+    },
+    {
+      "id": "c19",
+      "name": "闲聊-自我介绍",
+      "turns": [
+        {
+          "message": "你是谁",
+          "expectedIntent": "OTHER",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "与饮食无关"
+        }
+      ]
+    },
+    {
+      "id": "c20",
+      "name": "闲聊-写诗",
+      "turns": [
+        {
+          "message": "帮我写一首关于火锅的诗",
+          "expectedIntent": "OTHER",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "提到火锅但非推荐诉求，考察不能误判为推荐"
+        }
+      ]
+    },
+    {
+      "id": "c21",
+      "name": "边界-错别字",
+      "turns": [
+        {
+          "message": "中午次点清但的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "错别字鲁棒性：次=吃，但=淡"
+        }
+      ]
+    },
+    {
+      "id": "c22",
+      "name": "边界-英文",
+      "turns": [
+        {
+          "message": "recommend something light for lunch",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "中英混输鲁棒性"
+        }
+      ]
+    },
+    {
+      "id": "e-cui01",
+      "name": "菜系-东北菜",
+      "turns": [
+        {
+          "message": "午餐想吃东北菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "东北菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 东北菜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui02",
+      "name": "菜系-东南亚菜",
+      "turns": [
+        {
+          "message": "午餐想吃东南亚菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "东南亚菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 东南亚菜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui03",
+      "name": "菜系-云南菜",
+      "turns": [
+        {
+          "message": "午餐想吃云南菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "云南菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 云南菜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui04",
+      "name": "菜系-家常",
+      "turns": [
+        {
+          "message": "午餐想吃点家常菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "家常"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 家常"
+        }
+      ]
+    },
+    {
+      "id": "e-cui05",
+      "name": "菜系-小吃",
+      "turns": [
+        {
+          "message": "午餐想吃点小吃",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "小吃"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 小吃"
+        }
+      ]
+    },
+    {
+      "id": "e-cui06",
+      "name": "菜系-川菜",
+      "turns": [
+        {
+          "message": "午餐想吃川菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "川菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 川菜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui07",
+      "name": "菜系-快餐",
+      "turns": [
+        {
+          "message": "午餐想吃快餐",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "快餐"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 快餐"
+        }
+      ]
+    },
+    {
+      "id": "e-cui08",
+      "name": "菜系-新疆菜",
+      "turns": [
+        {
+          "message": "午餐想吃新疆菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "新疆菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 新疆菜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui09",
+      "name": "菜系-日料",
+      "turns": [
+        {
+          "message": "午餐想吃日料",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "日料"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 日料"
+        }
+      ]
+    },
+    {
+      "id": "e-cui10",
+      "name": "菜系-江浙菜",
+      "turns": [
+        {
+          "message": "午餐想吃江浙菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "江浙菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 江浙菜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui11",
+      "name": "菜系-海鲜",
+      "turns": [
+        {
+          "message": "午餐想吃海鲜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "海鲜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 海鲜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui12",
+      "name": "菜系-湘菜",
+      "turns": [
+        {
+          "message": "午餐想吃湘菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "湘菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 湘菜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui13",
+      "name": "菜系-火锅",
+      "turns": [
+        {
+          "message": "午餐想吃火锅",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "火锅"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 火锅"
+        }
+      ]
+    },
+    {
+      "id": "e-cui14",
+      "name": "菜系-烧烤",
+      "turns": [
+        {
+          "message": "午餐想吃烧烤",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "烧烤"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 烧烤"
+        }
+      ]
+    },
+    {
+      "id": "e-cui15",
+      "name": "菜系-甜品",
+      "turns": [
+        {
+          "message": "下午茶想吃甜品",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "下午茶"
+            ],
+            "cuisine": [
+              "甜品"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 甜品"
+        }
+      ]
+    },
+    {
+      "id": "e-cui16",
+      "name": "菜系-粉面",
+      "turns": [
+        {
+          "message": "午餐想吃粉面",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "粉面"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 粉面"
+        }
+      ]
+    },
+    {
+      "id": "e-cui17",
+      "name": "菜系-粤菜",
+      "turns": [
+        {
+          "message": "午餐想吃粤菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "粤菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 粤菜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui18",
+      "name": "菜系-粥汤",
+      "turns": [
+        {
+          "message": "早餐想喝点粥汤",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "早餐"
+            ],
+            "cuisine": [
+              "粥汤"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 粥汤"
+        }
+      ]
+    },
+    {
+      "id": "e-cui19",
+      "name": "菜系-素食",
+      "turns": [
+        {
+          "message": "午餐想吃素食",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "素食"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 素食"
+        }
+      ]
+    },
+    {
+      "id": "e-cui20",
+      "name": "菜系-西餐",
+      "turns": [
+        {
+          "message": "午餐想吃西餐",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "西餐"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 西餐"
+        }
+      ]
+    },
+    {
+      "id": "e-cui21",
+      "name": "菜系-轻食",
+      "turns": [
+        {
+          "message": "午餐想吃轻食",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "轻食"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 轻食"
+        }
+      ]
+    },
+    {
+      "id": "e-cui22",
+      "name": "菜系-闽南菜",
+      "turns": [
+        {
+          "message": "午餐想吃闽南菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "闽南菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 闽南菜"
+        }
+      ]
+    },
+    {
+      "id": "e-cui23",
+      "name": "菜系-韩餐",
+      "turns": [
+        {
+          "message": "午餐想吃韩餐",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "韩餐"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 韩餐"
+        }
+      ]
+    },
+    {
+      "id": "e-cui24",
+      "name": "菜系-鲁菜",
+      "turns": [
+        {
+          "message": "午餐想吃鲁菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "cuisine": [
+              "鲁菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "点名菜系 鲁菜"
+        }
+      ]
+    },
+    {
+      "id": "e-goal01",
+      "name": "健康目标-减脂",
+      "turns": [
+        {
+          "message": "晚饭想吃减脂一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "减脂"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 减脂"
+        }
+      ]
+    },
+    {
+      "id": "e-goal02",
+      "name": "健康目标-清淡",
+      "turns": [
+        {
+          "message": "晚饭想吃清淡一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 清淡"
+        }
+      ]
+    },
+    {
+      "id": "e-goal03",
+      "name": "健康目标-养胃",
+      "turns": [
+        {
+          "message": "晚饭想吃养胃一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "养胃"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 养胃"
+        }
+      ]
+    },
+    {
+      "id": "e-goal04",
+      "name": "健康目标-高蛋白",
+      "turns": [
+        {
+          "message": "晚饭想吃高蛋白一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "高蛋白"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 高蛋白"
+        }
+      ]
+    },
+    {
+      "id": "e-goal05",
+      "name": "健康目标-均衡",
+      "turns": [
+        {
+          "message": "晚饭想吃均衡一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "均衡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 均衡"
+        }
+      ]
+    },
+    {
+      "id": "e-goal06",
+      "name": "健康目标-降火",
+      "turns": [
+        {
+          "message": "晚饭想吃降火一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "降火"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 降火"
+        }
+      ]
+    },
+    {
+      "id": "e-goal07",
+      "name": "健康目标-低油",
+      "turns": [
+        {
+          "message": "晚饭想吃低油一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "低油"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 低油"
+        }
+      ]
+    },
+    {
+      "id": "e-goal08",
+      "name": "健康目标-低盐",
+      "turns": [
+        {
+          "message": "晚饭想吃低盐一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "低盐"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 低盐"
+        }
+      ]
+    },
+    {
+      "id": "e-goal09",
+      "name": "健康目标-低糖",
+      "turns": [
+        {
+          "message": "晚饭想吃低糖一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "低糖"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 低糖"
+        }
+      ]
+    },
+    {
+      "id": "e-goal10",
+      "name": "健康目标-补能",
+      "turns": [
+        {
+          "message": "晚饭想吃补能一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "补能"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 补能"
+        }
+      ]
+    },
+    {
+      "id": "e-goal11",
+      "name": "健康目标-增肌",
+      "turns": [
+        {
+          "message": "晚饭想吃增肌一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "增肌"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 增肌"
+        }
+      ]
+    },
+    {
+      "id": "e-goal12",
+      "name": "健康目标-控碳水",
+      "turns": [
+        {
+          "message": "晚饭想吃控碳水一点的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "healthGoal": [
+              "控碳水"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "健康目标 控碳水"
+        }
+      ]
+    },
+    {
+      "id": "e-taste01",
+      "name": "口味-中辣",
+      "turns": [
+        {
+          "message": "午饭想吃中辣的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "中辣"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 中辣"
+        }
+      ]
+    },
+    {
+      "id": "e-taste02",
+      "name": "口味-微辣",
+      "turns": [
+        {
+          "message": "午饭想吃微辣的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "微辣"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 微辣"
+        }
+      ]
+    },
+    {
+      "id": "e-taste03",
+      "name": "口味-麻辣",
+      "turns": [
+        {
+          "message": "午饭想吃麻辣的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "麻辣"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 麻辣"
+        }
+      ]
+    },
+    {
+      "id": "e-taste04",
+      "name": "口味-辣",
+      "turns": [
+        {
+          "message": "午饭想吃辣的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "辣"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 辣"
+        }
+      ]
+    },
+    {
+      "id": "e-taste05",
+      "name": "口味-咸鲜",
+      "turns": [
+        {
+          "message": "午饭想吃咸鲜的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "咸鲜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 咸鲜"
+        }
+      ]
+    },
+    {
+      "id": "e-taste06",
+      "name": "口味-奶香",
+      "turns": [
+        {
+          "message": "午饭想吃奶香的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "奶香"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 奶香"
+        }
+      ]
+    },
+    {
+      "id": "e-taste07",
+      "name": "口味-油香",
+      "turns": [
+        {
+          "message": "午饭想吃油香的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "油香"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 油香"
+        }
+      ]
+    },
+    {
+      "id": "e-taste08",
+      "name": "口味-烟火气",
+      "turns": [
+        {
+          "message": "午饭想吃烟火气的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "烟火气"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 烟火气"
+        }
+      ]
+    },
+    {
+      "id": "e-taste09",
+      "name": "口味-甜",
+      "turns": [
+        {
+          "message": "午饭想吃甜的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "甜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 甜"
+        }
+      ]
+    },
+    {
+      "id": "e-taste10",
+      "name": "口味-番茄味",
+      "turns": [
+        {
+          "message": "午饭想吃番茄味的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "番茄味"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 番茄味"
+        }
+      ]
+    },
+    {
+      "id": "e-taste11",
+      "name": "口味-蒜香",
+      "turns": [
+        {
+          "message": "午饭想吃蒜香的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "蒜香"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 蒜香"
+        }
+      ]
+    },
+    {
+      "id": "e-taste12",
+      "name": "口味-酱香",
+      "turns": [
+        {
+          "message": "午饭想吃酱香的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "酱香"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 酱香"
+        }
+      ]
+    },
+    {
+      "id": "e-taste13",
+      "name": "口味-酸甜",
+      "turns": [
+        {
+          "message": "午饭想吃酸甜的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "酸甜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 酸甜"
+        }
+      ]
+    },
+    {
+      "id": "e-taste14",
+      "name": "口味-鲜香",
+      "turns": [
+        {
+          "message": "午饭想吃鲜香的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "鲜香"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 鲜香"
+        }
+      ]
+    },
+    {
+      "id": "e-taste15",
+      "name": "口味-咖喱味",
+      "turns": [
+        {
+          "message": "午饭想吃咖喱味的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "taste": [
+              "咖喱味"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "口味 咖喱味"
+        }
+      ]
+    },
+    {
+      "id": "e-scene01",
+      "name": "场景-工作",
+      "turns": [
+        {
+          "message": "在工作的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "工作"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 工作，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-scene02",
+      "name": "场景-校园",
+      "turns": [
+        {
+          "message": "在校园的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "校园"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 校园，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-scene03",
+      "name": "场景-家里",
+      "turns": [
+        {
+          "message": "在家里的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "家里"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 家里，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-scene04",
+      "name": "场景-周末",
+      "turns": [
+        {
+          "message": "在周末的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "周末"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 周末，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-scene05",
+      "name": "场景-加班",
+      "turns": [
+        {
+          "message": "在加班的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "加班"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 加班，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-scene06",
+      "name": "场景-运动后",
+      "turns": [
+        {
+          "message": "在运动后的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "运动后"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 运动后，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-scene07",
+      "name": "场景-通勤",
+      "turns": [
+        {
+          "message": "在通勤的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "通勤"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 通勤，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-scene08",
+      "name": "场景-聚餐",
+      "turns": [
+        {
+          "message": "在聚餐的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "聚餐"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 聚餐，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-scene09",
+      "name": "场景-独处",
+      "turns": [
+        {
+          "message": "在独处的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "独处"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 独处，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-scene10",
+      "name": "场景-旅行",
+      "turns": [
+        {
+          "message": "在旅行的时候，吃点什么好",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "scene": [
+              "旅行"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给场景 旅行，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood01",
+      "name": "心情-疲惫",
+      "turns": [
+        {
+          "message": "今天疲惫，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "疲惫"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 疲惫，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood02",
+      "name": "心情-烦躁",
+      "turns": [
+        {
+          "message": "今天烦躁，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "烦躁"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 烦躁，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood03",
+      "name": "心情-开心",
+      "turns": [
+        {
+          "message": "今天开心，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "开心"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 开心，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood04",
+      "name": "心情-焦虑",
+      "turns": [
+        {
+          "message": "今天焦虑，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "焦虑"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 焦虑，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood05",
+      "name": "心情-低落",
+      "turns": [
+        {
+          "message": "今天低落，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "低落"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 低落，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood06",
+      "name": "心情-平静",
+      "turns": [
+        {
+          "message": "今天平静，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "平静"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 平静，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood07",
+      "name": "心情-压力大",
+      "turns": [
+        {
+          "message": "今天压力大，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "压力大"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 压力大，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood08",
+      "name": "心情-没胃口",
+      "turns": [
+        {
+          "message": "今天没胃口，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "没胃口"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 没胃口，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood09",
+      "name": "心情-想放松",
+      "turns": [
+        {
+          "message": "今天想放松，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "想放松"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 想放松，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-mood10",
+      "name": "心情-想奖励自己",
+      "turns": [
+        {
+          "message": "今天想奖励自己，想吃点什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mood": [
+              "想奖励自己"
+            ]
+          },
+          "expectedClarifyAction": "ASK",
+          "note": "只给心情 想奖励自己，缺餐次，需澄清"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify01",
+      "name": "需澄清-1",
+      "turns": [
+        {
+          "message": "随便推荐点",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify02",
+      "name": "需澄清-2",
+      "turns": [
+        {
+          "message": "有什么好吃的吗",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify03",
+      "name": "需澄清-3",
+      "turns": [
+        {
+          "message": "你帮我决定吧",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify04",
+      "name": "需澄清-4",
+      "turns": [
+        {
+          "message": "不知道吃啥",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify05",
+      "name": "需澄清-5",
+      "turns": [
+        {
+          "message": "想吃点东西",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify06",
+      "name": "需澄清-6",
+      "turns": [
+        {
+          "message": "推荐一下呗",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify07",
+      "name": "需澄清-7",
+      "turns": [
+        {
+          "message": "中午随便吧",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify08",
+      "name": "需澄清-8",
+      "turns": [
+        {
+          "message": "来点好吃的",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify09",
+      "name": "需澄清-9",
+      "turns": [
+        {
+          "message": "有什么建议",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-clarify10",
+      "name": "需澄清-10",
+      "turns": [
+        {
+          "message": "帮我看看吃什么",
+          "expectedIntent": "CLARIFY_NEEDED",
+          "expectedSlots": {},
+          "expectedClarifyAction": "ASK",
+          "note": "信息极少"
+        }
+      ]
+    },
+    {
+      "id": "e-plan01",
+      "name": "规划-1",
+      "turns": [
+        {
+          "message": "帮我规划今天三餐，清淡为主",
+          "expectedIntent": "MEAL_PLAN",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "多餐规划"
+        }
+      ]
+    },
+    {
+      "id": "e-plan02",
+      "name": "规划-2",
+      "turns": [
+        {
+          "message": "安排一下早中晚三餐",
+          "expectedIntent": "MEAL_PLAN",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "多餐规划"
+        }
+      ]
+    },
+    {
+      "id": "e-plan03",
+      "name": "规划-3",
+      "turns": [
+        {
+          "message": "一周的减脂饮食怎么搭配",
+          "expectedIntent": "MEAL_PLAN",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "多餐规划"
+        }
+      ]
+    },
+    {
+      "id": "e-plan04",
+      "name": "规划-4",
+      "turns": [
+        {
+          "message": "帮我配一下早餐和午餐",
+          "expectedIntent": "MEAL_PLAN",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "多餐规划"
+        }
+      ]
+    },
+    {
+      "id": "e-plan05",
+      "name": "规划-5",
+      "turns": [
+        {
+          "message": "今晚夜宵和明天的早餐帮我规划下",
+          "expectedIntent": "MEAL_PLAN",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "多餐规划"
+        }
+      ]
+    },
+    {
+      "id": "e-plan06",
+      "name": "规划-6",
+      "turns": [
+        {
+          "message": "三餐想吃均衡一点",
+          "expectedIntent": "MEAL_PLAN",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "多餐规划"
+        }
+      ]
+    },
+    {
+      "id": "e-adjust01",
+      "name": "调整-1",
+      "turns": [
+        {
+          "message": "中午想吃清淡的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {},
+          "expectedClarifyAction": "READY",
+          "note": "首轮建立上下文"
+        },
+        {
+          "message": "换一批",
+          "expectedIntent": "MEAL_ADJUST",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "次轮调整"
+        }
+      ]
+    },
+    {
+      "id": "e-adjust02",
+      "name": "调整-2",
+      "turns": [
+        {
+          "message": "晚餐想吃川菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {},
+          "expectedClarifyAction": "READY",
+          "note": "首轮建立上下文"
+        },
+        {
+          "message": "别那么辣",
+          "expectedIntent": "MEAL_ADJUST",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "次轮调整"
+        }
+      ]
+    },
+    {
+      "id": "e-adjust03",
+      "name": "调整-3",
+      "turns": [
+        {
+          "message": "午餐想吃轻食",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {},
+          "expectedClarifyAction": "READY",
+          "note": "首轮建立上下文"
+        },
+        {
+          "message": "再来一份",
+          "expectedIntent": "MEAL_ADJUST",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "次轮调整"
+        }
+      ]
+    },
+    {
+      "id": "e-adjust04",
+      "name": "调整-4",
+      "turns": [
+        {
+          "message": "晚上想吃点养胃的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {},
+          "expectedClarifyAction": "READY",
+          "note": "首轮建立上下文"
+        },
+        {
+          "message": "不要汤",
+          "expectedIntent": "MEAL_ADJUST",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "次轮调整"
+        }
+      ]
+    },
+    {
+      "id": "e-adjust05",
+      "name": "调整-5",
+      "turns": [
+        {
+          "message": "中午想吃高蛋白的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {},
+          "expectedClarifyAction": "READY",
+          "note": "首轮建立上下文"
+        },
+        {
+          "message": "换个便宜点的",
+          "expectedIntent": "MEAL_ADJUST",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "次轮调整"
+        }
+      ]
+    },
+    {
+      "id": "e-adjust06",
+      "name": "调整-6",
+      "turns": [
+        {
+          "message": "晚餐想吃粤菜",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {},
+          "expectedClarifyAction": "READY",
+          "note": "首轮建立上下文"
+        },
+        {
+          "message": "换成清淡的",
+          "expectedIntent": "MEAL_ADJUST",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "次轮调整"
+        }
+      ]
+    },
+    {
+      "id": "e-risk01",
+      "name": "风险-1",
+      "turns": [
+        {
+          "message": "胃疼吃什么能治好",
+          "expectedIntent": "HEALTH_RISK",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "健康风险"
+        }
+      ]
+    },
+    {
+      "id": "e-risk02",
+      "name": "风险-2",
+      "turns": [
+        {
+          "message": "有没有吃了能保证瘦的食物",
+          "expectedIntent": "HEALTH_RISK",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "健康风险"
+        }
+      ]
+    },
+    {
+      "id": "e-risk03",
+      "name": "风险-3",
+      "turns": [
+        {
+          "message": "高血压能不能吃火锅",
+          "expectedIntent": "HEALTH_RISK",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "健康风险"
+        }
+      ]
+    },
+    {
+      "id": "e-risk04",
+      "name": "风险-4",
+      "turns": [
+        {
+          "message": "孕早期饮食怎么安排最安全",
+          "expectedIntent": "HEALTH_RISK",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "健康风险"
+        }
+      ]
+    },
+    {
+      "id": "e-risk05",
+      "name": "风险-5",
+      "turns": [
+        {
+          "message": "绝食减肥怎么安排",
+          "expectedIntent": "HEALTH_RISK",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "健康风险"
+        }
+      ]
+    },
+    {
+      "id": "e-risk06",
+      "name": "风险-6",
+      "turns": [
+        {
+          "message": "糖尿病能随便吃甜的吗",
+          "expectedIntent": "HEALTH_RISK",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "健康风险"
+        }
+      ]
+    },
+    {
+      "id": "e-other01",
+      "name": "无关-1",
+      "turns": [
+        {
+          "message": "今天天气怎么样",
+          "expectedIntent": "OTHER",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "与饮食无关"
+        }
+      ]
+    },
+    {
+      "id": "e-other02",
+      "name": "无关-2",
+      "turns": [
+        {
+          "message": "你是谁",
+          "expectedIntent": "OTHER",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "与饮食无关"
+        }
+      ]
+    },
+    {
+      "id": "e-other03",
+      "name": "无关-3",
+      "turns": [
+        {
+          "message": "帮我写一首关于火锅的诗",
+          "expectedIntent": "OTHER",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "与饮食无关"
+        }
+      ]
+    },
+    {
+      "id": "e-other04",
+      "name": "无关-4",
+      "turns": [
+        {
+          "message": "推荐一部电影",
+          "expectedIntent": "OTHER",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "与饮食无关"
+        }
+      ]
+    },
+    {
+      "id": "e-other05",
+      "name": "无关-5",
+      "turns": [
+        {
+          "message": "快递到哪了",
+          "expectedIntent": "OTHER",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "与饮食无关"
+        }
+      ]
+    },
+    {
+      "id": "e-other06",
+      "name": "无关-6",
+      "turns": [
+        {
+          "message": "最近外卖涨价了吗",
+          "expectedIntent": "OTHER",
+          "expectedSlots": {},
+          "expectedClarifyAction": null,
+          "note": "与饮食无关"
+        }
+      ]
+    },
+    {
+      "id": "e-bound01",
+      "name": "边界-1",
+      "turns": [
+        {
+          "message": "中午次点清但的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "边界/鲁棒性"
+        }
+      ]
+    },
+    {
+      "id": "e-bound02",
+      "name": "边界-2",
+      "turns": [
+        {
+          "message": "recommend something light for lunch",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "边界/鲁棒性"
+        }
+      ]
+    },
+    {
+      "id": "e-bound03",
+      "name": "边界-3",
+      "turns": [
+        {
+          "message": "晚范想吃川采",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "cuisine": [
+              "川菜"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "边界/鲁棒性"
+        }
+      ]
+    },
+    {
+      "id": "e-bound04",
+      "name": "边界-4",
+      "turns": [
+        {
+          "message": "I want spicy food for dinner",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "晚餐"
+            ],
+            "taste": [
+              "辣"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "边界/鲁棒性"
+        }
+      ]
+    },
+    {
+      "id": "e-bound05",
+      "name": "边界-5",
+      "turns": [
+        {
+          "message": "午饭晚饭都想吃清淡的",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐",
+              "晚餐"
+            ],
+            "healthGoal": [
+              "清淡"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "边界/鲁棒性"
+        }
+      ]
+    },
+    {
+      "id": "e-bound06",
+      "name": "边界-6",
+      "turns": [
+        {
+          "message": "减脂期中午能吃什么",
+          "expectedIntent": "MEAL_RECOMMENDATION",
+          "expectedSlots": {
+            "mealTime": [
+              "午餐"
+            ],
+            "healthGoal": [
+              "减脂"
+            ]
+          },
+          "expectedClarifyAction": "READY",
+          "note": "边界/鲁棒性"
+        }
+      ]
+    }
+  ]
+}
